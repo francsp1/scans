@@ -4,6 +4,8 @@ dns/internal/*
 !dns/external/domain.csv
 !dns/internal/domain.csv
 
+dns/gobuster-subdomains.txt
+
 scans/host-discovery/*
 scans/port-scan/*
 scans/vuln-scan/*
@@ -18,3 +20,4 @@ greenbone/.env
 
 !.env.example
 !greenbone/.env.example
+

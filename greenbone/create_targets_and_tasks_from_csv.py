@@ -83,9 +83,9 @@ def sync_networks(gmp, networks, dry_run=False):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Create Greenbone targets and tasks from networks_excluded.csv; skip existing entries.'
+        description='Create Greenbone targets and tasks from networks_found.csv; skip existing entries.'
     )
-    parser.add_argument('--csv', type=Path, default=BASE_DIR.parent / 'networks_excluded.csv')
+    parser.add_argument('--csv', type=Path, default=BASE_DIR.parent / 'networks_found.csv')
     parser.add_argument('--dry-run', action='store_true', help='Read Greenbone and show planned changes without creating anything')
     args = parser.parse_args()
     networks = read_networks(args.csv)
