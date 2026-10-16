@@ -17,6 +17,8 @@ else:
 
 
 SOCKET = os.environ.get("GVM_SOCKET", "/run/gvmd/gvmd.sock")
+timeout_value = os.environ.get("GVM_TIMEOUT", "1800").strip().lower()
+TIMEOUT = 86400.0 if timeout_value in {"", "0", "none"} else float(timeout_value)
 REPO_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = Path(
     os.environ.get("OUTPUT_DIR", REPO_DIR / "scans" / "vuln-scan")
@@ -80,7 +82,7 @@ def main() -> None:
     password = os.environ["GVM_PASS"]
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    connection = UnixSocketConnection(path=SOCKET)
+    connection = UnixSocketConnection(path=SOCKET, timeout=TIMEOUT)
     with Gmp(connection, transform=EtreeCheckCommandTransform()) as gmp:
         gmp.authenticate(user, password)
         csv_format_id = None
